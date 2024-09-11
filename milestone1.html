@@ -4,23 +4,28 @@
         <title>Google Books</title>
     </head>
     <body>
+        <h2>Google Books</h2>
+        <p id ="data"></p>
        
-        <script>
+        <script type="text/javascript">
 
-            fetch("google-books-book.json").then(function(response)
+            fetch("./google-books-book.json").then(function(response)
             {
-                data= response.json()
-            }).then(data => { document.getElementsByTagName("p").textContent=data})
+                return response.json();
+            }).then(function (data){
+                for(var i=0; i<data.length; i++){
+                    document.getElementById("data").innerHTML +=
+                    data[i].kind + " " +  data[i].id + "=>"+  data[i].title + " " + data[i].subtitle + " " + data[i].authors + " ";
+                }
+            }
             .catch(function(error){
-                console.error("something went wrong");
-                console.error(error);
-            });
+                console.log(error);
+                
+            }));
         
 
             
         </script>
-        <p> 
-          
-        </p>
+      
     </body>
 </html>
