@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Books</title>
+    </head>
+    <body>
+       
+        <script>
+
+            fetch("google-books-book.json").then(function(response)
+            {
+                data= response.json()
+            }).then(data => { document.getElementsByTagName("p").textContent=data})
+            .catch(function(error){
+                console.error("something went wrong");
+                console.error(error);
+            });
+        
+
+            
+        </script>
+        <p> 
+          
+        </p>
+    </body>
+</html>
