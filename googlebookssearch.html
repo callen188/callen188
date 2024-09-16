@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Google Books
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+        <style>
+            div{ 
+          background-color: white;
+          width: 1000px;
+          border: 15px solid blue;
+          padding: 50px;
+          margin: 80px;
+            }
+        </style>
+   
+    </head>
+    <body>
+        <div class="container">
+        <h1>Google Books Search</h1>
+    <script> 
+        $(document).ready(function(){
+            fetch('/scr/json-files/google-books-search.json')
+            .then(response => {
+                if(!response.ok){
+                    throw new Error('Error');
+                } return response.json();
+            })
+            .then(data => {
+               $('#data-table').empty();
+               data.items.forEach(item=>{   
+               var volumeInfo =item.volumeInfo;
+               var title = volumeInfo.title;
+               var authors = volumeInfo.authors.join(" ,");
+               var publisher = volumeInfo.punlisher;
+               var publishedDate = volumeInfo.publishedDate;
+               var description = volumeInfo.description;
+               var pageCount = volumeInfo.pageCount;
+               var thumbnail = volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail: "";
+
+               $('#data-table').append(
+                <div>
+                <th><img/> src="${thumbnail}" alt="Book Cover"</th>
+                <th>Title: ${title}</th>
+                <th>Author: ${authors}</th>
+                <th>Publisher: ${publisher}</th>
+                <th>Published Date: ${publishedDate}</th>
+                <th>Page Count: ${pageCount}</th>
+                <th>Description:${description}</th>
+                <th><br/></th>
+                </div>
+               );
+
+
+               })
+
+            
+
+              
+            })
+            .catch(error=>{
+                console.error('Problem occured',error);
+            });
+
+        });
+    </script>
+     <a href="home.html">Home</a>
+     <br/>
+     
+     <br/>
+     <a href="milestone1.html">Google Books</a>
+     <br/>
+     
+     <br/>
+     <a href="openlibrary.html">View Library</a>
+     <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="https://books.google.com/books/content?id=Wfan6L9RGgYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72Ck-SDE0IfNZSnWJK-GFRLJ-uMiV8CWafGp2KsPvVHiSgm75LMY_6Asy_Dj11YjEtqtxgR_TgfbhhKVcNev6xU1HTR5CKwMfhDxdNEITzQn7y7Ox3srPxtQf4XfUZixUUgQqWv&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: The Modern Web</h6>
+                    <p>Author: Peter Gasston</p>
+                    <p>Publisher: No Starch Press</p>
+                    <p>Published Date: 2013</p>
+                    <p>Page Count: 264</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Provides information on Web development for multiple devices, covering such topics as structure and semantics, device APIs, multimedia, and Web apps."
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=NU3wOk2jzWsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: The Tangled Web</h6>
+                    <p>Author: Michal Zalewski</p>
+                    <p>Publisher: No Starch Press</p>
+                    <p>Published Date: 2012</p>
+                    <p>Page Count: 320</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Modern web applications are built on a tangle of technologies that have been developed over time and then haphazardly pieced together. Every piece of the web application stack, from HTTP requests to browser-side scripts, comes with important yet subtle security consequences. To keep users safe, it is essential for developers to confidently navigate this landscape. In The Tangled Web, Michal Zalewski, one of the world's top browser security experts, offers a compelling narrative that explains exactly how browsers work and why they're fundamentally insecure. Rather than dispense simplistic advice on vulnerabilities, Zalewski examines the entire browser security model, revealing weak points and providing crucial information for shoring up web application security. You'll learn how to: * Perform common but surprisingly complex tasks such as URL parsing and HTML sanitization * Use modern security features like Strict Transport Security, Content Security Policy, and Cross-Origin Resource Sharing * Leverage many variants of the same-origin policy to safely compartmentalize complex web applications and protect user credentials in case of XSS bugs * Build mashups and embed gadgets without getting stung by the tricky frame navigation policy * Embed or host user-supplied content without running into the trap of content sniffing For quick reference, \"Security Engineering Cheat Sheets\" at the end of each chapter offer ready solutions to problems you're most likely to encounter. With coverage extending as far as planned HTML5 features, The Tangled Web will help you create secure web applications that stand the test of time.",
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=yDyJ-iH6vpwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: Software Engineering for Modern Web Applications: Methodologies and Technologies</h6>
+                    <p>Author: Brandon, Daniel M.</p>
+                    <p>Publisher: IGI Global</p>
+                    <p>Published Date: 2008</p>
+                    <p>Page Count: 402</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "\"This book presents current, effective software engineering methods for the design and development of modern Web-based applications\"--Provided by publisher."
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=NruUsGqAcSAC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: Visual Design for the Modern Web</h6>
+                    <p>Author: Penny McIntire</p>
+                    <p>Publisher: New Riders</p>
+                    <p>Published Date: 2007</p>
+                    <p>Page Count: 360</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Just as great artists must understand their tools, great Web designers must understand the technology behind their art. In Visual Design for the Web, author Penny McIntire shows novice Web designers how to use their tools--including HTML, CSS, and JavaScript--in conjunction with the principles of aesthetics and usability to become masters of their craft. Chapters begin with explanations of the terminology and techniques of web structures, then demonstrate how to apply the rules of design to create beautiful sites. The book: Illustrates how fundamental principles of design apply to the web Includes charts, diagrams, and graphics to enhance learning and retention Covers site analysis, navigation, layout, color, graphics, typography and forms Demonstrates multiple techniques for getting just the right look and feel for your web sites Focuses on the characteristics that make sites usable, engaging, and memorable",
+            "industryIdentifiers"
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=98ycCwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: Modern Web Development</h6>
+                    <p>Author: Dino Esposito</p>
+                    <p>Publisher: Microsoft Press</p>
+                    <p>Published Date: 2016</p>
+                    <p>Page Count: 432</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description:"Master powerful new approaches to web architecture, design, and user experience This book presents a pragmatic, problem-driven, user-focused approach to planning, designing, and building dynamic web solutions. You’ll learn how to gain maximum value from Domain-Driven Design (DDD), define optimal supporting architecture, and succeed with modern UX-first design approaches. The author guides you through choosing and implementing specific technologies and addresses key user-experience topics, including mobile-friendly and responsive design. You’ll learn how to gain more value from existing Microsoft technologies such as ASP.NET MVC and SignalR by using them alongside other technologies such as Bootstrap, AJAX, JSON, and JQuery. By using these techniques and understanding the new ASP.NET Core 1.0, you can quickly build advanced web solutions that solve today’s problems and deliver an outstanding user experience. Microsoft MVP Dino Esposito shows you how to: Plan websites and web apps to mirror real-world social and business processes Use DDD to dissect and master the complexity of business domains Use UX-Driven Design to reduce costs and give customers what they want Realistically compare server-side and client-side web paradigms Get started with the new ASP.NET Core 1.0 Simplify modern visual webpage construction with Bootstrap Master practical, efficient techniques for running ASP.NET MVC projects Consider new options for implementing persistence and working with data models Understand Responsive Web Design’s pros, cons, and tradeoffs Build truly mobile-friendly, mobile-optimized websites About This Book For experienced developers and solution architects who want to plan and develop web solutions more effectively Assumes basic familiarity with the Microsoft web development stack"
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=KQlVCwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: PHP Web Services</h6>
+                    <p>Author: Lorna Jane Mitchell</p>
+                    <p>Publisher: O'Reilly Media, Inc.</p>
+                    <p>Published Date: 2016</p>
+                    <p>Page Count: 180</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Whether you’re sharing data between two internal systems or building an API so that users can access their data, this practical guide has everything you need to build APIs with PHP. Author Lorna Jane Mitchell provides lots of hands-on code samples, real-world examples, and advice based on her extensive experience to guide you through the process—from the underlying theory to methods for making your service robust. You’ll learn how to use this language to work with JSON, XML, and other web service technologies. This updated second edition includes new tools and features that reflect PHP updates and changes on the Web. Explore HTTP, from the request/response cycle to its verbs, headers, and cookies Work with and publish webhooks—user-defined HTTP callbacks Determine whether JSON or XML is the best data format for your application Get advice for working with RPC, SOAP, and RESTful services Use several tools and techniques for debugging HTTP web services Choose the service that works best for your application, and learn how to make it robust Document your API—and learn how to design it to handle errors"
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=aB6jWdpdcZgC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: AJAX and PHP</h6>
+                    <p>Authors: Bogdan Brinzarea, Audra Hendrix</p>
+                    <p>Publisher:Packt Publishing Ltd</p>
+                    <p>Published Date: 2009</p>
+                    <p>Page Count: 308</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Build user friendly Web 2.0 Applications with JavaScript and PHP."
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=N4NcDgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                <td>
+                    <h6>Title:  Data Visualization: Representing Information on Modern Web</h6>
+                    <p>Authors:  Andy Kirk, Simon Timms, Ǯdrew Rininsland, Swizec Teller</p>
+                    <p>Publisher: Packt Publishing Ltd</p>
+                    <p>Published Date: 2016</p>
+                    <p>Page Count: 531</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Unleash the power of data by creating interactive, engaging, and compelling visualizations for the web About This Book Get a portable, versatile, and flexible data visualization design approach that will help you navigate the complex path towards success Get thorough explanation of the many visual variables and visualization taxonomy to provide you with a menu of creative options A comprehensive and contemporary introduction to data-driven visualization design and the most effective approaches to designing impact-maximizing and cognition-amplifying visualizations Who This Book Is For This course is for developers who are excited about data and who want to share that excitement with others and it will be handy for the web developers or data scientists who want to create interactive visualizations for the web. Prior knowledge of developing web applications is required. You should have a working knowledge of both JavaScript and HTML. What You Will Learn Harness the power of D3 by building interactive and real-time data-driven web visualizations Find out how to use JavaScript to create compelling visualizations of social data Identify the purpose of your visualization and your project's parameters to determine overriding design considerations across your project's execution Apply critical thinking to visualization design and get intimate with your dataset to identify its potential visual characteristics Explore the various features of HTML5 to design creative visualizations Discover what data is available on Stack Overflow, Facebook, Twitter, and Google+ Gain a solid understanding of the common D3 development idioms Find out how to write basic D3 code for server using Node.js In Detail Do you want to create more attractive charts? Or do you have huge data sets and need to unearth the key insights in a visual manner? Data visualization is the representation and presentation of data, using proven design techniques to bring alive the patterns, stories, and key insights that are locked away. This learning path is divided into three modules. The first module will equip you with the key techniques required to overcome contemporary data visualization challenges. After getting familiar with key concepts of data visualization, it's time to incorporate it with various technologies. In the second module, Social Data Visualization with HTML5 and JavaScript, it teaches you how to leverage HTML5 techniques through JavaScript to build visualizations. It also clears up how the often complicated OAuth protocol works to help you unlock a universe of social media data from sites such as Twitter, Facebook, and Google+. Once you are familiar with the concepts of incorporating data visualization with HTML5 and JavaScript, third module, Learning d3.js Data Visualization, will lead you to D3, which has emerged as one of the leading platforms to develop beautiful, interactive visualizations over the web. This module provides a strong foundation in designing compelling web visualizations with D3.js. By the end of this course, you will have unlocked the mystery behind successful data visualizations. This Learning Path combines some of the best that Packt has to offer in one complete, curated package. It includes content from the following Packt products: Data Visualization: a successful design process by Andy Kirk Social Data Visualization with HTML5 and JavaScript by Simon Timms Learning d3.js Data Visualization, Second Edition by Ǯdrew Rininsland and Swizec Teller Style and approach This course includes all the resources that will help you jump into creating interactive and engaging visualizations for the web. Through this comprehensive course, you'll learn how to create engaging visualizations for the web to represent your data from start to finish!"
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=sS2LBAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api" />
+                </td>
+                <td>
+                    <h6>Title: Write Modern Web Apps with the MEAN Stack</h6>
+                    <p>Author: Jeff Dickey</p>
+                    <p>Publisher: Pearson Education</p>
+                    <p>Published Date: 2014</p>
+                    <p>Page Count: 246</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Traditionally, web applications have been architected so that the back-end houses all the front-end code. This has resulted in heavy projects that are difficult to manage and scale. This book will explain a new way to write web applications by treating the front-end as if it were a third-party (such as a mobile client). This book, written by a practicing MEAN developer, will take a holistic approach to using the MEAN JavaScript platform for creating modern web applications and lay out how to use the MEAN (Mongo, Express, AngularJS, and Node.js) set of tools to create a web application, from installation and setup of the tools to debugging and deploying your app. After an introduction to how web development is changing and the advantages of using the MEAN stack, the author jumps into an introduction to each tool and then dives into using the complete JavaScript-based application stack to build, test, and deploy apps."
+        </li>
+    </section>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <section class="sub-section" id="test">
+        <table>
+            <tr>
+                <td>
+                    <img src="http://books.google.com/books/content?id=r5-mAwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"/>
+                </td>
+                <td>
+                    <h6>Title:  Modern Web Development with IBM WebSphere</h6>
+                    <p>Authors:  Kyle Brown, Roland Barcia, Karl Bishop, Matthew Perrins</p>
+                    <p>Publisher: IBM Press</p>
+                    <p>Published Date: 2014</p>
+                    <p>Page Count: 384</p>
+                    
+                   
+
+                </td>
+            </tr>
+        </table>
+        <li> 
+            Description: "Build Tomorrow’s Best Mobile/Web Applications with IBM WebSphere Application Server 8.5 and IBM Worklight This guide presents a coherent strategy for building modern mobile/web applications that are fast, responsive, interactive, reusable, maintainable, extensible, and a pleasure to use. Four IBM experts offer practical, hands-on coverage of front-end development with IBM WebSphere Application Server 8.5, IBM Worklight, and today’s most popular open source frameworks. Using well-crafted examples, the authors introduce best practices for MobileFirst development, helping you create apps that work superbly on mobile devices and add features on conventional browsers. Throughout, you’ll learn better ways to deliver Web 2.0 apps with HTML /JavaScript front ends, RESTful Web Services, and persistent data. Proven by IBM and its customers, the approach covered in this book leads to more successful mobile/web applications—and more effective development teams. Coverage Includes • Developing for MobileFirst: moving from “graceful degradation” to “progressive enhancement” • Quickly delivering lightweight JEE apps with WebSphere Application Server’s new Liberty Profile • Implementing an agile, user-centered, page-oriented approach to design • Constructing REST services with WebSphere Liberty, Eclipse, and JEE annotations • Building better front-end application architectures with frameworks and JavaScript • Designing and building complex, transactional RESTful services that interface with databases and other data sources • Building IBM Worklight hybrid apps with open source frameworks: jQuery Mobile, Backbone, Require.js, and Handlebars • Debugging cross-platform, multi-language modern web apps • Promoting scalability, security, and connectivity into the wider enterprise The IBM Press developerWorks Series pairs books with complementary resources on the developerWorks website at https://www.ibm.com/developerworks/dwbooks/
+        </li>
+    </section>
+</div>
+</body>
+</html>

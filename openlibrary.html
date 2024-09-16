@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Library
+        </title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> 
+        <style>
+            div{ 
+          background-color: white;
+          width: 1000px;
+          border: 15px solid blue;
+          padding: 50px;
+          margin: 80px;
+            }
+        </style>
+ 
+    </head>
+    <body>
+        <div class="container">
+        <h1> Books Library</h1>
+        <script> 
+            $(document).ready(function(){
+                fetch('/scr/json-files/openlibrary-book.json')
+                .then(response => {
+                    if(!response.ok){
+                        throw new Error('Error');
+                    } return response.json();
+                })
+                .then(data => {
+                   $('#data-table').empty();
+                   var book = data["ISBN: 1593274847"];
+                   var title = book.title;
+                   var authors = book.authors.join(" ,");
+                   var publisher = book.punlisher;
+                   var publishedDate=book.publishedDate
+                   var pageCount=book.pagination;
+                   var image=book.cover? book.cover.medium: 'default-image-url-jpg';
+                    var tableofContents=book.table_of_contents ?book.table_of_contents.map(chapter=><liv>${chapter.title}</liv>).join(''):'N/A';
+                   $('#data-table').append(
+                    <div>
+                        <th><img/> src="${image}"alt="Book Cover"</th>
+                    <th>Title: ${title}</th>
+                    <th>Author: ${authors}</th>
+                    <th>Publisher: ${publisher}</th>
+                    <th>Published Date: ${publishedDate}</th>
+                    <th>Pagination: ${pageCount}</th>
+                    <th>Table of Content:<ul>${tableofContents}</ul></th>
+                    </div>
+                   );
+                })
+                .catch(error=>{
+                    console.error('Problem occured',error);
+                });
+    
+            });
+        </script>
+          <a href="home.html">Home</a>
+          <br/>
+          
+          <br/>
+          <a href="milestone1.html">Google Books</a>
+          <br/>
+          
+          <br/>
+          <a href="googlebookssearch.html">Search Books</a>
+          <br/>
+          
+          <br/>
+          <a href="librarysearch.html">Search Library</a>
+          
+         <section class="sub-section" id="test">
+            <table>
+                <tr>
+                    <td>
+                        <img src="https://books.google.com/books/content?id=Wfan6L9RGgYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE72Ck-SDE0IfNZSnWJK-GFRLJ-uMiV8CWafGp2KsPvVHiSgm75LMY_6Asy_Dj11YjEtqtxgR_TgfbhhKVcNev6xU1HTR5CKwMfhDxdNEITzQn7y7Ox3srPxtQf4XfUZixUUgQqWv&source=gbs_api" />
+                    </td>
+                    <td>
+                        <h3>Title: The Modern Web</h3>
+                        <p>Author: Peter Gasston</p>
+                        <p>Publisher: No Starch Press</p>
+                        <p>Published Date: 2013</p>
+                        <p>Pagination: xiv, 243 p.</p>
+                        
+                    
+     
+                       
+                    </td>
+                </tr>
+            </table>
+                        <h3>Table of Contents:</h3>
+                        <ul>
+                        <li>
+                            Introduction
+                        </li>
+                        <li>
+                            The web platform
+                        </li>
+                        <li>
+                            Structure and semantics
+                        </li>
+                        <li>
+                            Device-responsive CSS
+                        </li>
+                        <li>
+                            New approaches to CSS layouts
+                        </li>
+                        <li>
+                            Modern JavaScript
+                        </li>
+                        <li>
+                            Device APIs
+                        </li>
+                        <li>
+                            Images and graphics
+                        </li>
+                        <li>
+                            New forms
+                        </li>
+                        <li>
+                            Multimedia
+                        </li>
+                        <li>
+                            Web apps
+
+                        </li>
+                        <li>
+                            The future
+
+                        </li>
+                        <li>
+                            Appendixes
+                        </li>
+                        <li>
+                            Browser support as of March 2013
+
+                        </li>
+                        <li>
+                           Further Reading
+
+                        </li>
+                    </ul>
+                </div>        
+        </body>            
+                        
+</html>
+                     
+                       
