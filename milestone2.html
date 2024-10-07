@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> Milestone 2 </title>
+
+<style>
+   
+    body{
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0%;
+        padding: auto;
+        background-color: white;
+       
+    }
+  
+
+ .navbar{
+    background-color: rgb(2, 5, 11);
+    padding: 80px 40px;
+    color: rgb(37, 31, 24);
+    text-align: center;
+
+    }
+    .navbar a{
+        color: white;
+    text-decoration: none;
+    margin: 0 80px;
+    font-weight: bold;
+
+    }
+    .navbar a:hover{
+        text-decoration: underline;
+    }
+    #search-input{
+        display:block;
+        margin: 30px auto;
+        padding: 10px;
+        width: 300px;
+        font-size: 16px;
+    }
+    #search-button{
+        display: block;
+        margin: 0 auto;
+        padding: 10px 20px;
+        background-color: wheat;
+        border: none;
+        cursor: pointer;
+    }
+    h1{
+        text-align:left;
+        margin-top: 20px;
+    }
+    .pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: center;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+</style>
+
+</head>
+
+<body>
+<div class="navbar">
+    <a href="home.html">Home</a>
+    <a href="mybookshelf.html">My Book Shelf</a>
+
+</div>
+<h1> Search Books </h1>
+
+<input type="text" id="search-query" placeholder="Enter Title of Book Here">
+<button id="search-button"> Search</button>
+
+<div id="results" class="<div class="grid-container"></div>
+<div id="pagination"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var startIndex = 0;
+            var maxResults = 10;
+
+            function appendBookResults(items) {
+                items.forEach(function(item) {
+                    var id = item.id;
+                    var title = item.volumeInfo.title;
+                    var authors = item.volumeInfo.authors ? item.volumeInfo.authors.join(', ') : 'Unknown Author';
+                    var publisher = item.volumeInfo.publisher || 'Unknown Publisher';
+                    var publishedDate = item.volumeInfo.publishedDate || 'Unknown Date';
+                    var description = item.volumeInfo.description || 'No description available';
+                    var thumbnail = item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : 'https://via.placeholder.com/128x192?text=No+Image';
+                    
+                   
+                    $('#results').append('<div class="book-result">' +
+                        '<div class="book-info">' +
+                        '<h2><a href="bookDetails.html?id=' + id + '">' + title + '</a></h2>' +
+                        '<img src="' + thumbnail + '" alt="Book cover" class="book-cover">' +
+                        '</div>' +
+                        '</div>');
+                });
+            }
+
+            function addPaginationControls(totalItems) { 
+                $('#pagination').empty();
+                var totalPages = Math.ceil(totalItems / maxResults);
+                if (totalPages > 1) {
+                    var paginationDropdown = $('<select id="pagination-dropdown"></select>');
+                    for (var i = 0; i < totalPages; i++) {
+                        var option = $('<option></option>').attr('value', i).text('Page ' + (i + 1));
+                        paginationDropdown.append(option);
+                    }
+                    $('#pagination').append(paginationDropdown);
+
+                    $('#pagination-dropdown').change(function() {
+                        startIndex = $(this).val() * maxResults;
+                        searchBooks($('#search-query').val(), startIndex);
+                    });
+                }
+            }
+
+            function searchBooks(query, startIndex) { 
+                $.ajax({
+                    url: 'https://www.googleapis.com/books/v1/volumes?q=' + query + '&startIndex=' + startIndex + '&maxResults=' + maxResults,
+                    method: 'GET',
+                    success: function(response) {
+                        $('#results').empty();
+                        if (response.items) {
+                            appendBookResults(response.items);
+                            addPaginationControls(response.totalItems);
+                        } else {
+                            $('#results').append('<p>No results found</p>');
+                        }
+                    },
+                    error: function() {
+                        $('#results').empty();
+                        $('#results').append('<p>An error occurred while fetching the results</p>');
+                    }
+                });
+            }
+
+            function handleSearch() {
+                var query = $('#search-query').val(); 
+                if (query) {
+                    startIndex = 0; 
+                    searchBooks(query, startIndex);
+                } else {
+                    $('#results').empty();
+                    $('#results').append('<p>Please enter a search query</p>');
+                }
+            }
+
+            $('#search-button').click(function() {
+                handleSearch();
+            });
+
+         
+        });
+    </script>
+</body>

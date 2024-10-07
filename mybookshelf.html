@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title> My Bookshelf </title>
+
+<style>
+    body{
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0%;
+        padding: auto;
+        background-color: white;
+    }
+
+ .navbar{
+    background-color: rgb(2, 5, 11);
+    padding: 80px 40px;
+    color: rgb(37, 31, 24);
+    text-align: center;
+
+    }
+    .navbar a{
+    color: white;
+    text-decoration: none;
+    margin: 0 80px;
+    font-weight: bold;
+
+    }
+    .navbar a:hover{
+        text-decoration: underline;
+    }
+    #search-input{
+        display:block;
+        margin: 20px auto;
+        padding: auto;
+        width: 300px;
+        font-size: 16px;
+    }
+    #search-button{
+        display: block;
+        margin: 0 auto;
+        padding: 10px;
+        background-color: wheat;
+        border: none;
+        cursor: pointer;
+    }
+    h1{
+        text-align: center;
+        margin-top: 20px;
+    }
+        #bookshelf-results {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .book-item {
+            width: 200px;
+            margin: 15px;
+            text-align: center;
+            padding: 10px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-item img {
+            width: 100px;
+            height: auto;
+        }
+
+        .book-item a {
+            display: grid;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #2588BE;
+            text-decoration: none;
+        }
+
+        .book-item a:hover {
+            text-decoration: underline;
+        }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+<div class="navbar">
+    <a href="home.html">Home</a>
+    <a href="milestone2.html">Search Books </a>
+    <a href="mybookshelf.html">My Book Shelf</a>
+
+</div>
+<h1 style="text-align: center; margin-top: 20px;">My Bookshelf</h1>
+<div id="bookshelf-results"></div>
+
+<script>
+    $(document).ready(function() {
+        var apiURL = 'https://www.googleapis.com/books/v1/users/112814762125505019981/bookshelves/0/volumes';
+    
+        $.getJSON(apiURL)
+            .done(function(data) {
+                var results = data.items;
+                var output = '';
+                
+                if (results && results.length > 0) {
+                   
+                    $.each(results, function(index, book) {
+                        var title = book.volumeInfo.title;
+                        var coverImg = book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.smallThumbnail : 'no-image.png';
+                        var bookId = book.id;
+    
+                        output += `
+                          <div class="book-item">
+                            <img src="${coverImg}" alt="${title}">
+                            <a href="bookdetails.html?bookId=${bookId}">${title}</a>
+                          </div>
+                        `;
+                    });
+                } else {
+                    output = '<p>No books found in your bookshelf.</p>';
+                }
+                
+                $('#bookshelf-results').html(output);
+            })
+            .fail(function() {
+                alert("Failed to fetch data. Please check your connection or try again later.");
+            });
+    });
+    </script>
+    </html>
