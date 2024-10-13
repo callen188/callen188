@@ -1,0 +1,80 @@
+#app {
+    margin: 20px;
+}
+#results, #details, #bookshelf {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#pagination a {
+    margin: 0 5px;
+    cursor: pointer;
+    text-decoration: underline;
+}
+#pagination a.active {
+    font-weight: bold;
+}
+h1 {
+    text-align: center;
+    padding: 20px;
+    background-color: #0a0b0c;
+    color: white;
+    margin: 0;
+}
+#searchContainer {
+    text-align: center;
+    margin-top: 20px;
+}
+#search-input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #0b0c0c;
+    border-radius: 4px;
+    outline: none;
+}
+#search-input:focus {
+    border-color: #070808;
+}
+#search-btn {
+    padding: 10px 15px;
+    margin-left: 10px;
+    background-color: #0c0d0e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#search-btn:hover {
+    background-color: #005bb5;
+}
+.book {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    display: inline-block;
+    width: 100%;
+}
+#details {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+.navbar{
+    background-color: rgb(2, 5, 11);
+    padding: 80px 40px;
+    color: rgb(37, 31, 24);
+    text-align: center;
+
+    }
+    .navbar a{
+    color: white;
+    text-decoration: none;
+    margin: 0 80px;
+    font-weight: bold;
+
+    }
+    .navbar a:hover{
+        text-decoration: underline;
+    }
