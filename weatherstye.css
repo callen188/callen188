@@ -1,0 +1,22 @@
+#app {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#current-weather, #forecast {
+    margin-top: 20px;
+}
+#forecast div {
+    margin-bottom: 10px;
+}
+.weather-day {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+h1, h2 {
+    background-color: #87CEEB; /* Light blue background for headers */
+    padding: 10px;
+    border-radius: 5px;
+    color: #fff; /* White text color for better contrast */
+}
