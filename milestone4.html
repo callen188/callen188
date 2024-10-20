@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
+    <script src="script.js" defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+    <div id="app">
+        <h1>Book Finder</h1>
+        <div id="signin-btn"></div>
+        <div id="user-info"></div>
+        <input type="text" id="search" placeholder="Enter search terms">
+        <button id="search-btn">Search</button>
+        <div id="layout-toggle">
+            <button id="grid-view">Grid View</button>
+            <button id="list-view">List View</button>
+        </div>
+        <div id="search-history"></div>
+        <div id="results"></div>
+        <div id="pagination"></div>
+        <div id="details"></div>
+        <div id="bookshelf">
+            <h2>Your Bookshelf</h2>
+        </div>
+    </div>
+      
+     <!-- search_results.mustache -->
+<script id="search-results-template" type="x-tmpl-mustache">
+    <div class="book" data-id="{{id}}">
+        <h3>{{volumeInfo.title}}</h3>
+        <img src="{{volumeInfo.imageLinks.thumbnail}}" alt="{{volumeInfo.title}}">
+    </div>
+</script>
+
+<!-- book_details.mustache -->
+<script id="book-details-template" type="x-tmpl-mustache">
+    <div>
+        <h2>{{volumeInfo.title}}</h2>
+        <p>{{volumeInfo.description}}</p>
+        <img src="{{volumeInfo.imageLinks.thumbnail
+</body>
+</html>
