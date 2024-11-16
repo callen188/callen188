@@ -1,18 +1,113 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="weatherstye.css">
+
+    <style>
+
+        body {
+            background-image: url('https://cdn.pixabay.com/photo/2019/08/21/08/07/clouds-4428659_1280.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            height: 100vh; 
+            margin: 0; 
+            font-family: Arial, sans-serif;
+        }
+
+        
+        #app {
+            margin: 20px auto;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8); 
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #current-weather, #forecast {
+            margin-top: 20px;
+        }
+
+        .weather-day {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        h1, h2 {
+            background-color: #87CEEB;
+            padding: 10px;
+            border-radius: 5px;
+            color: #fff;
+        }
+    </style>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="weatherscript.js" defer></script>
+
+    <script>
+        $(document).ready(function () {
+            function getWeather() {
+                const city = $('#city').val();
+                const apiKey = '39b05395a47c346bb566b0d05c03dfa8';
+                const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+                const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+
+                function convertToFahrenheit(celsius) {
+                    return (celsius * 9 / 5) + 32;
+                }
+
+                $.getJSON(weatherUrl, function (data) {
+                    const tempF = convertToFahrenheit(data.main.temp);
+                    const weather = `
+                        <div>City: ${data.name}</div>
+                        <div>Temperature: ${tempF.toFixed(2)}°F</div>
+                        <div>Weather: ${data.weather[0].description}</div>
+                    `;
+                    $('#current-weather').html(weather);
+                }).fail(function () {
+                    alert('Failed to retrieve current weather data');
+                });
+
+                $.getJSON(forecastUrl, function (data) {
+                    const forecast = data.list.filter((_, index) => index % 8 === 0);
+
+                    $('#forecast').html('<h2>5-Day Forecast</h2>');
+                    forecast.forEach(day => {
+                        const tempF = convertToFahrenheit(day.main.temp);
+                        const forecastDay = `
+                            <div class="weather-day">
+                                <div>Date: ${new Date(day.dt_txt).toLocaleDateString()}</div>
+                                <div>Temperature: ${tempF.toFixed(2)}°F</div>
+                                <div>Weather: ${day.weather[0].description}</div>
+                            </div>
+                        `;
+                        $('#forecast').append(forecastDay);
+                    });
+                }).fail(function () {
+                    alert('Failed to retrieve forecast data');
+                });
+            }
+
+            $('#search-btn').click(getWeather);
+            $('#city').keypress(function (event) {
+                if (event.which === 13) {
+                    getWeather();
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div id="app">
-        <a href="index.html">Home </a>
-        <h1>Weather DashBoard</h1>
-        <h3>Check Your Local Forecast Today </h3>
+        <a href="index.html">Home</a>
+        <h1>Weather Dashboard</h1>
+        <h3>Check Your Local Forecast Today</h3>
         <input type="text" id="city" placeholder="Enter city">
         <button id="search-btn">Get Weather</button>
         <div id="current-weather"></div>
