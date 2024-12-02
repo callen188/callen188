@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $('#search-btn').click(function() {
         const city = $('#city').val();
-        const apiKey = '39b05395a47c346bb566b0d05c03dfa8'; // Replace with your actual API key
+        const apiKey = '39b05395a47c346bb566b0d05c03dfa8'; 
         const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric&timestamp=${new Date().getTime()}`;
         const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric&timestamp=${new Date().getTime()}`;
 
